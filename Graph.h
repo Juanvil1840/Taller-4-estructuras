@@ -30,8 +30,8 @@ class Graph {
 	
 	// Edge operations
 	long edgeCount();
-	bool insertDirectedEdge(T source, T destination, P weight);
-	bool insertUndirectedEdge(T source, T destination, P weight);
+	bool insertDirectedEdge(long sourceIndex, long destinationIndex, P weight);
+	bool insertUndirectedEdge(long sourceIndex, long destinationIndex, P weight);
 	P* findEdge(T source, T destination); 
 	bool removeEdge(T source, T destination); 
 

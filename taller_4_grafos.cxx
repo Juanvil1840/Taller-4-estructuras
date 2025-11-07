@@ -87,7 +87,7 @@ int main( int argc, char* argv[] )
 
     //TODO 4
     float cost = g.getVertex(start).distanceTo(g.getVertex(end));
-    g.insertUndirectedEdge(g.getVertices()[start],g.getVertices()[end],cost);
+    g.insertUndirectedEdge(start,end,cost);
   }
   delete [] in_mesh_file_buffer;
 

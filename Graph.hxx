@@ -134,11 +134,8 @@ long Graph<T,P>::edgeCount(){
 }
 
 template < class T, class P >
-bool Graph<T,P>::insertDirectedEdge(T source, T destination, P weight){
-    long sourceIndex = findVertex(source);
-    long destinationIndex = findVertex(destination);
-    
-    if((sourceIndex == -1) || (destinationIndex == -1)) return false;
+bool Graph<T,P>::insertDirectedEdge(long sourceIndex, long destinationIndex, P weight){    
+    if((sourceIndex < 0) || (sourceIndex >= (long)vertices.size()) || (destinationIndex < 0) || (destinationIndex >= (long)vertices.size())) return false;
 
     typename std::list<std::list<Pair<P>>>::iterator ita = edges.begin();
     std::advance(ita, sourceIndex);
@@ -154,11 +151,8 @@ bool Graph<T,P>::insertDirectedEdge(T source, T destination, P weight){
 }
 
 template < class T, class P >
-bool Graph<T,P>::insertUndirectedEdge(T source, T destination, P weight){
-    long sourceIndex = findVertex(source);
-    long destinationIndex = findVertex(destination);
-    
-    if((sourceIndex == -1) || (destinationIndex == -1)) return false;
+bool Graph<T,P>::insertUndirectedEdge(long sourceIndex, long destinationIndex, P weight){
+    if((sourceIndex < 0) || (sourceIndex >= (long)vertices.size()) || (destinationIndex < 0) || (destinationIndex >= (long)vertices.size())) return false;
 
     typename std::list<std::list<Pair<P>>>::iterator ita = edges.begin();
     std::advance(ita, sourceIndex);
