@@ -7,7 +7,7 @@ Pair<P>::Pair() {
 }
 
 template< class P >
-Pair<P>::Pair(int ind, P cost){
+Pair<P>::Pair(long ind, P cost){
     index = ind;
     weight = cost;
 }
@@ -16,7 +16,7 @@ template< class P >
 Pair<P>::~Pair() = default;
 
 template< class P >
-int Pair<P>::getIndex() const{
+long Pair<P>::getIndex() const{
     return index;
 }
 
@@ -26,7 +26,7 @@ P Pair<P>::getWeight() const{
 }
 
 template< class P >
-void Pair<P>::setIndex(int ind){
+void Pair<P>::setIndex(long ind){
     index = ind;
 }
 

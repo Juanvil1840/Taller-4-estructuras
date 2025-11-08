@@ -4,15 +4,15 @@
 template< class P >
 class Pair{
   protected:
-    int index;
+    long index;
     P weight;
   public:
     Pair();
-    Pair(int ind, P wei);
+    Pair(long ind, P wei);
     ~Pair();
-    int getIndex() const;
+    long getIndex() const;
     P getWeight() const;
-    void setIndex(int ind);
+    void setIndex(long ind);
     void setweight(P wei);
 };
 
