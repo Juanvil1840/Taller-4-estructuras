@@ -100,16 +100,18 @@ int main( int argc, char* argv[] )
     return( 1 );
   }
 
-  /*
-    TODO 5:
+
     std::vector< long > path = g.Dijkstra( start_id, end_id );
     std::cout << path.size( ) << std::endl;
     for( unsigned int i = 0; i < path.size( ); ++i )
+    {
+    Point p = g.getVertex( path[ i ] );
     std::cout
-    << vertices[ path[ i ] ].X << " "
-    << vertices[ path[ i ] ].Y << " "
-    << vertices[ path[ i ] ].Z << std::endl;
-  */
+    << p.X << " "
+    << p.Y << " "
+    << p.Z << std::endl;
+    }
 
   return( 0 );
 }
+
