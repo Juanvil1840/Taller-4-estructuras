@@ -39,6 +39,7 @@ class Graph {
 	void flatTraversal(); 
 	bool DFS(T vertex, std::vector<T>& visited);
 	bool BFS(T vertex, std::vector<T>& visited); 
+	std::vector<long> Dijkstra(long startIndex, long endIndex);
 };
 
 #include "Graph.hxx"
