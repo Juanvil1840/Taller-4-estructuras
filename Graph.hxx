@@ -284,3 +284,82 @@ bool Graph<T,P>::BFS(T vertex, std::vector<T>& visited){
 
     return true;
 } 
+
+template <class T, class P>
+std::vector<long> Graph<T,P>::Dijkstra(long startIndex, long endIndex){
+
+    long n = (long)vertices.size(); // Obtiene cuantos vértices hay en el grafo 
+
+    std::vector<P> dist; // vector dist de tipo plantilla
+    dist.resize(n); 
+
+    std::vector<long> pred; // vector de predecesores   <-- corregido (era long0)
+    pred.resize(n);
+
+    std::vector<bool> S; //vector de nodos ya visitados
+    S.resize(n);
+
+    //inicializar
+    long i;
+    for(i = 0; i<n; i++){
+        dist[i] = (P)9999999999999999; // representa un infinito
+        pred[i]= -1; //ningun predecesor
+        S[i] = false; // nadie ha sido visitado
+    }
+
+    //nodo inicial
+    dist[startIndex] = (P)0; // la distancia del inicio es 0
+    pred[startIndex] = startIndex; // El predecesor del inicio es él mismo
+
+    // Se busca el vértice no visitado que tenga la menor distancia desde el nodo origen
+    for(long k=0; k<n; k++){
+        long ind = -1; //índice del vertice con menor distancia 
+        P minDist = (P)9999999999999999; //minima distancia encontrada hasta ahroa
+        for(long j = 0; j<n; j++){
+            if(!S[j] && dist[j] < minDist){ // si visitado es falso y distancia es menor a la minima distancia encontrada hasta ahora
+                minDist = dist[j];// minDist guarda la menor distancia encontrada hasta esta iteración
+                ind = j; // ind es el índice del vértice que tiene esa menor distancia
+            }
+        }
+        if(ind == -1){ break;} // no hay más alcanzables
+
+        S[ind] = true;   // <-- corregido (antes decía visited)
+
+        
+        if(ind == endIndex){break;} //Si se llega al final, termin
+        
+
+        // despues de escojer la distancia minima, se debe revisar si pasar por ind mejora la distancia hacia cada vecino
+
+        // obtener lista de vecino de ind
+        typename std::list<std::list<Pair<P>>>::iterator ita = edges.begin();
+        std::advance(ita, ind);
+
+        
+        typename std::list<Pair<P>>::iterator itp;
+        for(itp = ita->begin(); itp != ita->end(); itp++){
+            long v = itp->getIndex();
+            P weight = itp->getWeight();
+            if(!S[v] && dist[ind] + weight < dist[v]){ // si el nodo no ha sido visitade y la distancia más el peso de la conexión es menor a la distancia actual para ese nodo 
+                dist[v] = dist[ind] + weight;
+                pred[v] = ind;   // <-- corregido (antes decía u, variable inexistente)
+            }
+        }
+
+    }
+
+    //reconstruir el camino desde endIndex hacía atrás 
+    std::vector<long> path;
+    long actual = endIndex;
+
+    if(pred[actual] == -1){return path;}
+
+    while(actual != startIndex){
+        path.insert(path.begin(), actual);
+        actual = pred[actual];
+    }
+
+    path.insert(path.begin(), startIndex);
+
+    return path;
+}
